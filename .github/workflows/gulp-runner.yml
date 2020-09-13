@@ -6,7 +6,7 @@ on:
     # On which branch
     branches: ["master"]
     # On which files
-    # paths: ["scripts/scripts.js", "styles/styles.scss"]
+    paths: ["scripts/scripts.js", "styles/styles.scss"]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,9 +22,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: |
-            npm ci
-            gulp
+      - run: npm ci
+      - run: gulp
             
       - name: Commit files
         run: |
