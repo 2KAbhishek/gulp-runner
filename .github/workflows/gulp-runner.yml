@@ -1,4 +1,4 @@
-name: Build GH Pages
+name: Run gulp tasks
 
 # Controls when the action will run.
 on:
@@ -16,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Run gulp tasks
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Sets up node
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Run gulp tasks
       - run: npm ci
       - run: gulp
 
