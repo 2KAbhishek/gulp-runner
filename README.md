@@ -1,3 +1,4 @@
+
 # gulp-runner
 
 ![Size](https://img.shields.io/github/repo-size/2kabhishek/gulp-runner?style=plastic&color=0f0&label=Size)
@@ -11,3 +12,9 @@
 Gulp Runner
 
 This github action will run default tasks mentioned in a gulp file and then commit the changes.
+
+## Customization
+
+In the `.github/workflows/gulp-runner.yml` file `paths` and commit messages can be customized.
+
+
