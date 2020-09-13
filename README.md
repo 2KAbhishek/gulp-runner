@@ -16,5 +16,4 @@ This github action will run default tasks mentioned in a gulp file and then comm
 ## Customization
 
 In the `.github/workflows/gulp-runner.yml` file `paths` and commit messages can be customized.
-
-
+Add a secret named `REPO_GITHUB_TOKEN` to your repo for pushing updated changes.
