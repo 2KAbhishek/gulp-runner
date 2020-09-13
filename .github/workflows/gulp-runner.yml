@@ -6,7 +6,7 @@ on:
     # On which branch
     branches: ["master"]
     # On which files
-    paths: ["scripts/scripts.js", "styles/styles.scss"]
+    # paths: ["scripts/scripts.js", "styles/styles.scss"]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
