@@ -13,7 +13,15 @@ Gulp Runner
 
 This github action will run default tasks mentioned in a gulp file and then commit the changes.
 
+## Requirements
+
+Add a secret named `REPO_GITHUB_TOKEN` to your repo for pushing updated changes.
+
 ## Customization
 
-In the `.github/workflows/gulp-runner.yml` file `paths` and commit messages can be customized.
-Add a secret named `REPO_GITHUB_TOKEN` to your repo for pushing updated changes.
+In your repo's `.github/workflows/main.yml` file `paths` can be customized.
+
+### More customizations
+
+For custom commit messgaes, fork the repo, In the `.github/workflows/gulp-runner.yml` commit messages can be customized.
+
