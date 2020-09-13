@@ -23,9 +23,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
-      - run: gulp
+      - run: |
+            npm ci
+            gulp
 
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Commit files
         run: |
           git config --local user.name  ${{ github.actor }}
