@@ -1,11 +1,39 @@
-name: A workflow for my Hello World file
-on: push
+name: Build GH Pages
+
+# Controls when the action will run.
+on:
+  push:
+    # On which branch
+    branches: ["master"]
+    # On which files
+    paths: ["scripts/scripts.js", "styles/styles.scss"]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # Job name
   build:
-    name: Hello world action
+    # Runner name
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: ./
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # Sets up node
+      - uses: actions/setup-node@v1
         with:
-          MY_NAME: "Abhishek"
+          node-version: 12
+      - name: Run gulp tasks
+      - run: npm ci
+      - run: gulp
+
+      - name: Commit files
+        run: |
+          git config --local user.name  ${{ github.actor }}
+          git add -A
+          git commit -m "Update gulp output files"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.REPO_GITHUB_TOKEN }}
+          # force: true
