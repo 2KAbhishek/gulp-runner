@@ -2,6 +2,11 @@ name: "Gulp Runner"
 description: "Run defined gulp tasks and commit changes"
 author: "iam2kabhishek@gmail.com"
 
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
 branding:
   icon: "fast-forward"
   color: "orange"
+
