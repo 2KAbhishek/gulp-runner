@@ -22,19 +22,106 @@
 
 </div>
 
-Gulp Runner
+# Gulp Runner
 
-This github action will run default tasks mentioned in a gulp file and then commit the changes.
+This GitHub Action runs gulp tasks defined in your gulpfile.js.
+
+## Usage
+
+### Basic Usage (Run default task)
+
+```yaml
+name: Build
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Run Gulp
+        uses: 2KAbhishek/gulp-runner@master
+      
+      - name: Commit changes
+        run: |
+          git config --local user.name  ${{ github.actor }}
+          git add -A
+          git commit -m "Update gulp output files" || echo "No changes to commit"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### Run Specific Task
+
+```yaml
+- name: Run Gulp Task
+  uses: 2KAbhishek/gulp-runner@master
+  with:
+    task: 'process-sass'
+```
 
 ## Requirements
 
-Add a secret named `REPO_GITHUB_TOKEN` to your repo for pushing updated changes.
+- Your repository must have a `package.json` file with gulp and required dependencies
+- Your repository must have a `gulpfile.js` file defining your tasks
 
-## Customization
+## Features
 
-In your repo's `.github/workflows/main.yml` file `paths` can be customized.
+- Automatically installs npm dependencies
+- Runs gulp tasks with proper error handling
+- Shows detailed output for debugging
+- Supports running specific tasks or default task
 
-### More customizations
+## Inputs
 
-For custom commit messgaes, fork the repo, In the `.github/workflows/gulp-runner.yml` commit messages can be customized.
+| Input | Description | Required | Default |
+|-------|-------------|----------|---------|
+| task | Gulp task to run | No | (runs default task) |
+
+## Example with Multiple Steps
+
+```yaml
+steps:
+  - uses: actions/checkout@v2
+  
+  - name: Run Gulp SASS Task
+    uses: 2KAbhishek/gulp-runner@master
+    with:
+      task: 'process-sass'
+  
+  - name: Commit and Push
+    run: |
+      git config --local user.name  ${{ github.actor }}
+      git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      git add -A
+      git commit -m "Build: Update compiled assets" || echo "No changes"
+      git push
+```
+
+## Troubleshooting
+
+### No output files generated
+
+Make sure:
+1. Your `package.json` includes all required gulp dependencies
+2. Your `gulpfile.js` has properly defined tasks
+3. Check the Action logs for any error messages
+
+### Permission denied when pushing
+
+Add appropriate permissions to your workflow:
+
+```yaml
+permissions:
+  contents: write
+```
+
+Or use a Personal Access Token with repo scope.
 

@@ -2,6 +2,12 @@ name: "Gulp Runner"
 description: "Run defined gulp tasks and commit changes"
 author: "iam2kabhishek@gmail.com"
 
+inputs:
+  task:
+    description: 'Gulp task to run (default: default task)'
+    required: false
+    default: ''
+
 runs:
   using: "docker"
   image: "Dockerfile"
